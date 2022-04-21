@@ -6,8 +6,7 @@ import 'package:integration_test/integration_test.dart';
 import 'package:login_ui/main.dart';
 
 void main() {
-  final binding = IntegrationTestWidgetsFlutterBinding.ensureInitialized()
-      as IntegrationTestWidgetsFlutterBinding;
+  IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
   group('E2E Widget test', () {
     testWidgets('Should display fields for user', (WidgetTester tester) async {
@@ -29,7 +28,6 @@ void main() {
       final btnRegister = find.byKey(const Key('btnRegister'));
 
       await tester.tap(btnRegister);
-
       await tester.pumpAndSettle();
     
       expect(find.text("Already registered?"), findsOneWidget);
@@ -39,5 +37,14 @@ void main() {
 
   testWidgets('Label error for field email', (WidgetTester tester) async {
 
+    await tester.pumpWidget(const MyApp());
+    
+    final buttonSignIn = find.byKey(const Key('loginButton'));
+    final emailErrorFinder = find.text('Please enter a valid email');
+
+    await tester.tap(buttonSignIn);
+    await tester.pump(const Duration(milliseconds: 1000));
+
+    expect(emailErrorFinder, findsOneWidget);
   });
 }
