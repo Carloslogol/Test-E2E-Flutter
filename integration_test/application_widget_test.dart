@@ -18,7 +18,7 @@ void main() {
       await tester.ensureVisible(fieldEmail);
       await tester.ensureVisible(fieldPassword);
 
-      sleep(const Duration(seconds: 2));
+      //sleep(const Duration(seconds: 2));
 
     });
     
