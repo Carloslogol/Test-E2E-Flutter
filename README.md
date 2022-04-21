@@ -2,7 +2,7 @@
 
 ## Para las pruebas con el navegador chrome:
 
-### 1. Arrancamos el WebDriver desde nuestra terminal con el puerto "44444":
+### 1. Arrancamos el WebDriver desde nuestra terminal con el puerto "4444":
     ./chromedriver -port=4444
     
 ### 2. Luego abriendo una terminal desde el proyecto ejecutamos el siguiente comando para la ejecucióin de las pruebas que hemos preparado en el aplicativo:

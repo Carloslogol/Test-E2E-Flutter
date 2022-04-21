@@ -33,38 +33,38 @@ void main() {
       expect(find.text("Already registered?"), findsOneWidget);
 
     });
-  });
 
-  testWidgets('Label error for field email', (WidgetTester tester) async {
+    testWidgets('Label error for field email', (WidgetTester tester) async {
 
-    await tester.pumpWidget(const MyApp());
-    
-    final buttonSignIn = find.byKey(const Key('loginButton'));
-    final emailErrorFinder = find.text('Please enter a valid email');
+      await tester.pumpWidget(const MyApp());
 
-    await tester.tap(buttonSignIn);
-    await tester.pump(const Duration(milliseconds: 1000));
+      final buttonSignIn = find.byKey(const Key('loginButton'));
+      final emailErrorFinder = find.text('Please enter a valid email');
 
-    expect(emailErrorFinder, findsOneWidget);
-  });
+      await tester.tap(buttonSignIn);
+      await tester.pump(const Duration(milliseconds: 1000));
 
-  testWidgets('Label login correct', (WidgetTester tester) async {
-    await tester.pumpWidget(const MyApp());
+      expect(emailErrorFinder, findsOneWidget);
+    });
 
-    final fieldEmail = find.byKey(const Key('emailField'));
-    final fieldPassword = find.byKey(const Key('passwordField'));
-    final buttonSignIn = find.byKey(const Key('loginButton'));
+    testWidgets('Label login correct', (WidgetTester tester) async {
+      await tester.pumpWidget(const MyApp());
 
-    await tester.enterText(fieldEmail, 'corre@gmail.com');
-    await tester.pumpAndSettle();
-    await tester.enterText(fieldPassword, 'carloslogol');
-    await tester.pumpAndSettle();
+      final fieldEmail = find.byKey(const Key('emailField'));
+      final fieldPassword = find.byKey(const Key('passwordField'));
+      final buttonSignIn = find.byKey(const Key('loginButton'));
 
-    await tester.tap(buttonSignIn);
-    await tester.pumpAndSettle();
+      await tester.enterText(fieldEmail, 'corre@gmail.com');
+      await tester.pumpAndSettle();
+      await tester.enterText(fieldPassword, 'carloslogol');
+      await tester.pumpAndSettle();
 
-    expect(find.text('Has sido logeado correctamente!'), findsOneWidget);
+      await tester.tap(buttonSignIn);
+      await tester.pumpAndSettle();
 
+      expect(find.text('Has sido logeado correctamente!'), findsOneWidget);
+
+    });
   });
 
 }
