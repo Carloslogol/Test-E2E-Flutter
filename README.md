@@ -1,5 +1,5 @@
-# Login UI made with flutter.
+# Login UI y E2E test hecho con flutter.
 
-## Screenshot
+## Para las pruebas con el navegador chrome:
 
-![Screenshot1](https://github.com/hawier-dev/flutter-login-ui/blob/main/screenshots/login1.png) ![Screenshot2](https://github.com/hawier-dev/flutter-login-ui/blob/main/screenshots/login2.png)
+
