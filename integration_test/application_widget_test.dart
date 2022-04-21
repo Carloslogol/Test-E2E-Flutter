@@ -47,4 +47,24 @@ void main() {
 
     expect(emailErrorFinder, findsOneWidget);
   });
+
+  testWidgets('Label login correct', (WidgetTester tester) async {
+    await tester.pumpWidget(const MyApp());
+
+    final fieldEmail = find.byKey(const Key('emailField'));
+    final fieldPassword = find.byKey(const Key('passwordField'));
+    final buttonSignIn = find.byKey(const Key('loginButton'));
+
+    await tester.enterText(fieldEmail, 'corre@gmail.com');
+    await tester.pumpAndSettle();
+    await tester.enterText(fieldPassword, 'carloslogol');
+    await tester.pumpAndSettle();
+
+    await tester.tap(buttonSignIn);
+    await tester.pumpAndSettle();
+
+    expect(find.text('Has sido logeado correctamente!'), findsOneWidget);
+
+  });
+
 }

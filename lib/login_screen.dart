@@ -13,6 +13,13 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
   var rememberValue = false;
+  bool _isVisible = false;
+
+  void showLabel() {
+    setState(() {
+      _isVisible = !_isVisible;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -91,7 +98,9 @@ class _LoginPageState extends State<LoginPage> {
                   ElevatedButton(
                     key: const Key('loginButton'),
                     onPressed: () {
-                      if (_formKey.currentState!.validate()) {}
+                      if (_formKey.currentState!.validate()) {
+                        showLabel();
+                      }
                     },
                     style: ElevatedButton.styleFrom(
                       padding: const EdgeInsets.fromLTRB(40, 15, 40, 15),
@@ -125,6 +134,8 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ],
                   ),
+                  Visibility(visible: _isVisible,
+                      child: const Text("Has sido logeado correctamente!")),
                 ],
               ),
             )
@@ -132,12 +143,6 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
     );
-    String validatePassword(String value) {
-      if (!(value.length > 5) && value.isNotEmpty) {
-        return "Password should contain more than 5 characters";
-      }
-      return "";
-    }
   }
 
 }
