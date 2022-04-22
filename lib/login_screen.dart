@@ -2,6 +2,8 @@ import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:login_ui/register_screen.dart';
 
+import 'login_successful_screen.dart';
+
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key, required this.title}) : super(key: key);
   final String title;
@@ -99,7 +101,13 @@ class _LoginPageState extends State<LoginPage> {
                     key: const Key('loginButton'),
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
-                        showLabel();
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    const LoginSuccessfulPage(title: 'Login successful UI',)
+                            )
+                        );
                       }
                     },
                     style: ElevatedButton.styleFrom(
@@ -135,7 +143,8 @@ class _LoginPageState extends State<LoginPage> {
                     ],
                   ),
                   Visibility(visible: _isVisible,
-                      child: const Text("Has sido logeado correctamente!")),
+                      child: const Text("Has sido logeado correctamente!")
+                  ),
                 ],
               ),
             )

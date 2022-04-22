@@ -1,70 +1,49 @@
-import 'dart:io';
-
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:login_ui/main.dart';
+
+import 'user_interface/login_page_user.dart';
+import 'user_interface/login_successful_page_user.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
   group('E2E Widget test', () {
-    testWidgets('Should display fields for user', (WidgetTester tester) async {
+    testWidgets('Given registered user open the application'
+                'When press login button'
+                'Then error label will appear',
+            (WidgetTester tester) async {
+      /** Given */
       await tester.pumpWidget(const MyApp());
 
-      final fieldEmail = find.byKey(const Key('emailField'));
-      final fieldPassword = find.byKey(const Key('passwordField'));
-
-      await tester.ensureVisible(fieldEmail);
-      await tester.ensureVisible(fieldPassword);
-
-      //sleep(const Duration(seconds: 2));
-
-    });
-    
-    testWidgets('Load register view', (WidgetTester tester) async {
-      await tester.pumpWidget(const MyApp());
-
-      final btnRegister = find.byKey(const Key('btnRegister'));
-
-      await tester.tap(btnRegister);
-      await tester.pumpAndSettle();
-    
-      expect(find.text("Already registered?"), findsOneWidget);
-
-    });
-
-    testWidgets('Label error for field email', (WidgetTester tester) async {
-
-      await tester.pumpWidget(const MyApp());
-
-      final buttonSignIn = find.byKey(const Key('loginButton'));
-      final emailErrorFinder = find.text('Please enter a valid email');
-
-      await tester.tap(buttonSignIn);
+      /** When */
+      await tester.tap(LoginPageUser().buttonSignIn);
       await tester.pump(const Duration(milliseconds: 1000));
 
-      expect(emailErrorFinder, findsOneWidget);
+      /** Then */
+      expect(LoginPageUser().emailErrorFinder, findsOneWidget);
     });
 
-    testWidgets('Label login correct', (WidgetTester tester) async {
+    testWidgets('Given registered user open the application'
+                'When fill in all fields'
+                'Then to complete the registration',
+            (WidgetTester tester) async {
+
+      /** Given */
       await tester.pumpWidget(const MyApp());
 
-      final fieldEmail = find.byKey(const Key('emailField'));
-      final fieldPassword = find.byKey(const Key('passwordField'));
-      final buttonSignIn = find.byKey(const Key('loginButton'));
-
-      await tester.enterText(fieldEmail, 'corre@gmail.com');
+      /** When */
+      await tester.enterText(LoginPageUser().emailField, 'corre@gmail.com');
       await tester.pumpAndSettle();
-      await tester.enterText(fieldPassword, 'carloslogol');
+      await tester.enterText(LoginPageUser().passwordField, 'carloslogol');
       await tester.pumpAndSettle();
 
-      await tester.tap(buttonSignIn);
+      await tester.tap(LoginPageUser().buttonSignIn);
       await tester.pumpAndSettle();
+      await tester.pump(const Duration(seconds: 2));
 
-      expect(find.text('Has sido logeado correctamente!'), findsOneWidget);
-
+      /** Then */
+      expect(LoginSuccessfulPageUser().labelRegisterComplete, findsOneWidget);
     });
   });
-
 }

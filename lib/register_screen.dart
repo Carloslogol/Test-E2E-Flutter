@@ -1,6 +1,7 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:login_ui/login_screen.dart';
+import 'package:login_ui/register_successful.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key, required this.title}) : super(key: key);
@@ -121,8 +122,17 @@ class _RegisterPageState extends State<RegisterPage> {
                     height: 20,
                   ),
                   ElevatedButton(
+                    key: const Key('btnRegister'),
                     onPressed: () {
-                      if (_formKey.currentState!.validate()) {}
+                      if (_formKey.currentState!.validate()) {
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    const RegisterSuccessfulPage(title: 'Register successful UI',),
+                            )
+                        );
+                      }
                     },
                     style: ElevatedButton.styleFrom(
                       padding: const EdgeInsets.fromLTRB(40, 15, 40, 15),
